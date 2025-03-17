@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+    <h1>Produtos</h1>
+    <ul id="lista-produtos"></ul>
+
+    <script>
+        async function carregarProdutos() {
+            const response = await fetch("http://localhost:5000/api/produtos");
+            const produtos = await response.json();
+            const lista = document.getElementById("lista-produtos");
+
+            produtos.forEach(produto => {
+                const item = document.createElement("li");
+                item.textContent = `${produto.nome} - R$${produto.preco}`;
+                lista.appendChild(item);
+            });
+        }
+        carregarProdutos();
+    </script>
+</body>
+</html>
